@@ -39,45 +39,45 @@ const initials = (name: string) => name.split(" ").map((part) => part[0]).join("
 const id = (prefix: string) => `${prefix}_${randomUUID().slice(0, 8)}`;
 
 const gyms: Gym[] = [
-  { id: "gym_northstar", name: "Northstar Athletics", slug: "northstar-athletics", plan: "PRO", members: 128, trainers: 6, status: "active", mrr: 149, joined: "Jan 12, 2025" },
-  { id: "gym_harbor", name: "Harbor Strength Club", slug: "harbor-strength", plan: "FREE", members: 9, trainers: 2, status: "active", mrr: 0, joined: "Aug 04, 2025" },
-  { id: "gym_peak", name: "Peak Performance Lab", slug: "peak-performance", plan: "PRO", members: 74, trainers: 4, status: "active", mrr: 149, joined: "Mar 19, 2025" },
+  { id: "gym_northstar", name: "Karachi Strength & Fitness", slug: "karachi-strength-fitness", plan: "PRO", members: 128, trainers: 6, status: "active", mrr: 149, joined: "Jan 12, 2025" },
+  { id: "gym_harbor", name: "Lahore FitHub", slug: "lahore-fithub", plan: "FREE", members: 9, trainers: 2, status: "active", mrr: 0, joined: "Aug 04, 2025" },
+  { id: "gym_peak", name: "Islamabad Performance Club", slug: "islamabad-performance-club", plan: "PRO", members: 74, trainers: 4, status: "active", mrr: 149, joined: "Mar 19, 2025" },
 ];
 
 const demoUsers: User[] = [
-  { id: "usr_admin", name: "Maya Patel", email: "admin@fitsync.demo", role: "super_admin", gymName: "FitSync HQ", gymPlan: "PRO", avatar: "MP", passwordHash: bcrypt.hashSync("demo1234", 8) },
-  { id: "usr_owner", name: "Jordan Ellis", email: "owner@fitsync.demo", role: "gym_owner", gymId: "gym_northstar", gymName: "Northstar Athletics", gymPlan: "PRO", avatar: "JE", passwordHash: bcrypt.hashSync("demo1234", 8) },
-  { id: "usr_trainer", name: "Alex Rivera", email: "trainer@fitsync.demo", role: "trainer", gymId: "gym_northstar", gymName: "Northstar Athletics", gymPlan: "PRO", avatar: "AR", passwordHash: bcrypt.hashSync("demo1234", 8) },
-  { id: "usr_member", name: "Sam Okafor", email: "member@fitsync.demo", role: "member", gymId: "gym_northstar", gymName: "Northstar Athletics", gymPlan: "PRO", avatar: "SO", passwordHash: bcrypt.hashSync("demo1234", 8) },
-  { id: "usr_free", name: "Taylor Kim", email: "free@fitsync.demo", role: "gym_owner", gymId: "gym_harbor", gymName: "Harbor Strength Club", gymPlan: "FREE", avatar: "TK", passwordHash: bcrypt.hashSync("demo1234", 8) },
+  { id: "usr_admin", name: "Ayesha Khan", email: "admin@fitsync.demo", role: "super_admin", gymName: "FitSync Pakistan HQ", gymPlan: "PRO", avatar: "AK", passwordHash: bcrypt.hashSync("demo1234", 8) },
+  { id: "usr_owner", name: "Hamza Ahmed", email: "owner@fitsync.demo", role: "gym_owner", gymId: "gym_northstar", gymName: "Karachi Strength & Fitness", gymPlan: "PRO", avatar: "HA", passwordHash: bcrypt.hashSync("demo1234", 8) },
+  { id: "usr_trainer", name: "Usman Ali", email: "trainer@fitsync.demo", role: "trainer", gymId: "gym_northstar", gymName: "Karachi Strength & Fitness", gymPlan: "PRO", avatar: "UA", passwordHash: bcrypt.hashSync("demo1234", 8) },
+  { id: "usr_member", name: "Hira Malik", email: "member@fitsync.demo", role: "member", gymId: "gym_northstar", gymName: "Karachi Strength & Fitness", gymPlan: "PRO", avatar: "HM", passwordHash: bcrypt.hashSync("demo1234", 8) },
+  { id: "usr_free", name: "Bilal Sheikh", email: "free@fitsync.demo", role: "gym_owner", gymId: "gym_harbor", gymName: "Lahore FitHub", gymPlan: "FREE", avatar: "BS", passwordHash: bcrypt.hashSync("demo1234", 8) },
 ];
 
 const members = [
-  { id: "mem_001", gymId: "gym_northstar", name: "Sam Okafor", email: "sam@example.com", goal: "Build strength", status: "Active", trainer: "Alex Rivera", progress: 78, lastActive: "Today, 9:42 AM", joined: "Feb 14, 2025", initials: "SO" },
-  { id: "mem_002", gymId: "gym_northstar", name: "Priya Shah", email: "priya@example.com", goal: "Improve mobility", status: "Active", trainer: "Alex Rivera", progress: 64, lastActive: "Yesterday", joined: "Mar 02, 2025", initials: "PS" },
-  { id: "mem_003", gymId: "gym_northstar", name: "Marcus Chen", email: "marcus@example.com", goal: "Lose 10 lbs", status: "At risk", trainer: "Devon Brooks", progress: 41, lastActive: "5 days ago", joined: "Apr 18, 2025", initials: "MC" },
-  { id: "mem_004", gymId: "gym_northstar", name: "Lena Williams", email: "lena@example.com", goal: "Train for a 10K", status: "Active", trainer: "Nina James", progress: 86, lastActive: "Today, 7:18 AM", joined: "May 27, 2025", initials: "LW" },
-  { id: "mem_005", gymId: "gym_harbor", name: "Taylor Kim", email: "taylor@example.com", goal: "General fitness", status: "Active", trainer: "Chris Moore", progress: 52, lastActive: "Today", joined: "Jun 01, 2025", initials: "TK" },
+  { id: "mem_001", gymId: "gym_northstar", name: "Hira Malik", email: "hira.malik@karachistrength.demo", goal: "Build strength", status: "Active", trainer: "Usman Ali", progress: 78, lastActive: "Today, 9:42 AM", joined: "Feb 14, 2025", initials: "HM" },
+  { id: "mem_002", gymId: "gym_northstar", name: "Areeba Khan", email: "areeba.khan@karachistrength.demo", goal: "Improve mobility", status: "Active", trainer: "Usman Ali", progress: 64, lastActive: "Yesterday", joined: "Mar 02, 2025", initials: "AK" },
+  { id: "mem_003", gymId: "gym_northstar", name: "Talha Ahmed", email: "talha.ahmed@karachistrength.demo", goal: "Lose 10 kg", status: "At risk", trainer: "Fahad Iqbal", progress: 41, lastActive: "5 days ago", joined: "Apr 18, 2025", initials: "TA" },
+  { id: "mem_004", gymId: "gym_northstar", name: "Maham Raza", email: "maham.raza@karachistrength.demo", goal: "Train for a 10K", status: "Active", trainer: "Sana Noor", progress: 86, lastActive: "Today, 7:18 AM", joined: "May 27, 2025", initials: "MR" },
+  { id: "mem_005", gymId: "gym_harbor", name: "Saad Hussain", email: "saad.hussain@lahorefithub.demo", goal: "General fitness", status: "Active", trainer: "Bilal Sheikh", progress: 52, lastActive: "Today", joined: "Jun 01, 2025", initials: "SH" },
 ];
 
 const trainers = [
-  { id: "trn_001", gymId: "gym_northstar", name: "Alex Rivera", email: "alex@example.com", specialty: "Strength & conditioning", members: 28, status: "Active", initials: "AR" },
-  { id: "trn_002", gymId: "gym_northstar", name: "Devon Brooks", email: "devon@example.com", specialty: "Performance training", members: 24, status: "Active", initials: "DB" },
-  { id: "trn_003", gymId: "gym_northstar", name: "Nina James", email: "nina@example.com", specialty: "Running & endurance", members: 18, status: "Away", initials: "NJ" },
-  { id: "trn_004", gymId: "gym_harbor", name: "Chris Moore", email: "chris@example.com", specialty: "General fitness", members: 9, status: "Active", initials: "CM" },
+  { id: "trn_001", gymId: "gym_northstar", name: "Usman Ali", email: "usman.ali@karachistrength.demo", specialty: "Strength & conditioning", members: 28, status: "Active", initials: "UA" },
+  { id: "trn_002", gymId: "gym_northstar", name: "Fahad Iqbal", email: "fahad.iqbal@karachistrength.demo", specialty: "Performance training", members: 24, status: "Active", initials: "FI" },
+  { id: "trn_003", gymId: "gym_northstar", name: "Sana Noor", email: "sana.noor@karachistrength.demo", specialty: "Running & endurance", members: 18, status: "Away", initials: "SN" },
+  { id: "trn_004", gymId: "gym_harbor", name: "Bilal Sheikh", email: "bilal.sheikh@lahorefithub.demo", specialty: "General fitness", members: 9, status: "Active", initials: "BS" },
 ];
 
 const attendance = [
-  { id: "att_001", gymId: "gym_northstar", member: "Sam Okafor", date: "Today", checkIn: "09:42 AM", checkOut: null, status: "Present" },
-  { id: "att_002", gymId: "gym_northstar", member: "Lena Williams", date: "Today", checkIn: "07:18 AM", checkOut: "08:23 AM", status: "Present" },
-  { id: "att_003", gymId: "gym_northstar", member: "Priya Shah", date: "Yesterday", checkIn: "05:46 PM", checkOut: "06:52 PM", status: "Present" },
-  { id: "att_004", gymId: "gym_northstar", member: "Marcus Chen", date: "Yesterday", checkIn: "—", checkOut: null, status: "Absent" },
+  { id: "att_001", gymId: "gym_northstar", member: "Hira Malik", date: "Today", checkIn: "09:42 AM", checkOut: null, status: "Present" },
+  { id: "att_002", gymId: "gym_northstar", member: "Maham Raza", date: "Today", checkIn: "07:18 AM", checkOut: "08:23 AM", status: "Present" },
+  { id: "att_003", gymId: "gym_northstar", member: "Areeba Khan", date: "Yesterday", checkIn: "05:46 PM", checkOut: "06:52 PM", status: "Present" },
+  { id: "att_004", gymId: "gym_northstar", member: "Talha Ahmed", date: "Yesterday", checkIn: "—", checkOut: null, status: "Absent" },
 ];
 
 const workouts = [
-  { id: "wrk_001", gymId: "gym_northstar", name: "Lower body strength", type: "Strength", scheduledFor: "Today · 5:30 PM", duration: 55, status: "Scheduled", member: "Sam Okafor" },
-  { id: "wrk_002", gymId: "gym_northstar", name: "Mobility & core", type: "Mobility", scheduledFor: "Tomorrow · 7:00 AM", duration: 40, status: "Scheduled", member: "Priya Shah" },
-  { id: "wrk_003", gymId: "gym_northstar", name: "Tempo run", type: "Cardio", scheduledFor: "Mon · 6:30 AM", duration: 45, status: "Completed", member: "Lena Williams" },
+  { id: "wrk_001", gymId: "gym_northstar", name: "Lower body strength", type: "Strength", scheduledFor: "Today · 5:30 PM", duration: 55, status: "Scheduled", member: "Hira Malik" },
+  { id: "wrk_002", gymId: "gym_northstar", name: "Mobility & core", type: "Mobility", scheduledFor: "Tomorrow · 7:00 AM", duration: 40, status: "Scheduled", member: "Areeba Khan" },
+  { id: "wrk_003", gymId: "gym_northstar", name: "Tempo run", type: "Cardio", scheduledFor: "Mon · 6:30 AM", duration: 45, status: "Completed", member: "Maham Raza" },
 ];
 
 const dietPlans = [{
@@ -88,9 +88,9 @@ const dietPlans = [{
   calories: 2280,
   generatedAt: "Today, 10:04 AM",
   days: [
-    { day: "Monday", meals: [{ type: "Breakfast", name: "Greek yogurt, berries & oats", calories: 480 }, { type: "Lunch", name: "Chicken quinoa power bowl", calories: 620 }, { type: "Dinner", name: "Salmon, rice & greens", calories: 700 }, { type: "Snacks", name: "Cottage cheese & banana", calories: 280 }] },
-    { day: "Tuesday", meals: [{ type: "Breakfast", name: "Egg scramble with avocado toast", calories: 520 }, { type: "Lunch", name: "Turkey hummus wrap", calories: 560 }, { type: "Dinner", name: "Lean beef stir fry", calories: 680 }, { type: "Snacks", name: "Protein smoothie", calories: 300 }] },
-    { day: "Wednesday", meals: [{ type: "Breakfast", name: "Overnight oats with almond butter", calories: 500 }, { type: "Lunch", name: "Tuna and white bean salad", calories: 580 }, { type: "Dinner", name: "Chicken fajita plate", calories: 690 }, { type: "Snacks", name: "Apple with peanut butter", calories: 260 }] },
+    { day: "Monday", meals: [{ type: "Breakfast", name: "Greek yogurt, berries & oats", calories: 480 }, { type: "Lunch", name: "Grilled chicken quinoa bowl", calories: 620 }, { type: "Dinner", name: "Baked salmon, rice & greens", calories: 700 }, { type: "Snacks", name: "Cottage cheese & banana", calories: 280 }] },
+    { day: "Tuesday", meals: [{ type: "Breakfast", name: "Scrambled eggs, avocado toast & fruit", calories: 520 }, { type: "Lunch", name: "Turkey hummus wrap", calories: 560 }, { type: "Dinner", name: "Lean beef stir-fry with vegetables", calories: 680 }, { type: "Snacks", name: "Protein smoothie", calories: 300 }] },
+    { day: "Wednesday", meals: [{ type: "Breakfast", name: "Overnight oats with almond butter", calories: 500 }, { type: "Lunch", name: "Tuna and white bean salad", calories: 580 }, { type: "Dinner", name: "Chicken fajita bowl", calories: 690 }, { type: "Snacks", name: "Apple with peanut butter", calories: 260 }] },
   ],
 }];
 
@@ -164,10 +164,10 @@ async function generateWithOpenAI(input: Record<string, unknown>): Promise<DietD
 
 router.get("/auth/demo", (_req, res) => {
   res.json([
-    { role: "super_admin", email: "admin@fitsync.demo", password: "demo1234", name: "Maya Patel" },
-    { role: "gym_owner", email: "owner@fitsync.demo", password: "demo1234", name: "Jordan Ellis" },
-    { role: "trainer", email: "trainer@fitsync.demo", password: "demo1234", name: "Alex Rivera" },
-    { role: "member", email: "member@fitsync.demo", password: "demo1234", name: "Sam Okafor" },
+    { role: "super_admin", email: "admin@fitsync.demo", password: "demo1234", name: "Ayesha Khan" },
+    { role: "gym_owner", email: "owner@fitsync.demo", password: "demo1234", name: "Hamza Ahmed" },
+    { role: "trainer", email: "trainer@fitsync.demo", password: "demo1234", name: "Usman Ali" },
+    { role: "member", email: "member@fitsync.demo", password: "demo1234", name: "Hira Malik" },
   ]);
 });
 
@@ -201,10 +201,10 @@ router.get("/dashboard/overview", (req, res) => {
     stats,
     growth: [{ month: "Jan", members: 72 }, { month: "Feb", members: 86 }, { month: "Mar", members: 94 }, { month: "Apr", members: 108 }, { month: "May", members: 116 }, { month: "Jun", members: 128 }],
     activity: [
-      { id: "act_1", title: "New member joined", detail: "Lena Williams joined Northstar Athletics", time: "12 min ago", type: "member" },
-      { id: "act_2", title: "Diet plan generated", detail: "AI plan ready for Sam Okafor", time: "1 hr ago", type: "sparkles" },
-      { id: "act_3", title: "Workout completed", detail: "Priya completed Mobility & core", time: "2 hrs ago", type: "check" },
-      { id: "act_4", title: "Subscription renewed", detail: "Northstar Athletics renewed Pro", time: "Yesterday", type: "billing" },
+      { id: "act_1", title: "New member joined", detail: "Maham Raza joined Karachi Strength & Fitness", time: "12 min ago", type: "member" },
+      { id: "act_2", title: "Diet plan generated", detail: "AI plan ready for Hira Malik", time: "1 hr ago", type: "sparkles" },
+      { id: "act_3", title: "Workout completed", detail: "Areeba completed Mobility & core", time: "2 hrs ago", type: "check" },
+      { id: "act_4", title: "Subscription renewed", detail: "Karachi Strength & Fitness renewed Pro", time: "Yesterday", type: "billing" },
     ],
   });
 });

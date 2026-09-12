@@ -10,16 +10,16 @@ async function seed() {
   await connectMongo();
   await Promise.all([Gym.deleteMany({}), User.deleteMany({})]);
   const gym = await Gym.create({
-    name: "Northstar Athletics",
-    slug: "northstar-athletics",
+    name: "Karachi Strength & Fitness",
+    slug: "karachi-strength-fitness",
     plan: "PRO",
     status: "active",
   });
   const passwordHash = await bcrypt.hash("demo1234", 10);
   await User.insertMany([
-    { gymId: gym._id, name: "Jordan Ellis", email: "owner@fitsync.demo", passwordHash, role: "gym_owner" },
-    { gymId: gym._id, name: "Alex Rivera", email: "trainer@fitsync.demo", passwordHash, role: "trainer" },
-    { gymId: gym._id, name: "Sam Okafor", email: "member@fitsync.demo", passwordHash, role: "member" },
+    { gymId: gym._id, name: "Hamza Ahmed", email: "owner@fitsync.demo", passwordHash, role: "gym_owner" },
+    { gymId: gym._id, name: "Usman Ali", email: "trainer@fitsync.demo", passwordHash, role: "trainer" },
+    { gymId: gym._id, name: "Hira Malik", email: "member@fitsync.demo", passwordHash, role: "member" },
   ]);
   await mongoose.disconnect();
 }
