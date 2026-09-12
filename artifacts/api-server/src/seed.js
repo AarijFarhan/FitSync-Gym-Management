@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
-import { connectMongo } from "./config/database";
-import { Gym, User } from "./models/schemas";
+import { connectMongo } from "./config/database.js";
+import { Gym, User } from "./models/schemas.js";
 
 async function seed() {
   if (!process.env.MONGO_URI) {

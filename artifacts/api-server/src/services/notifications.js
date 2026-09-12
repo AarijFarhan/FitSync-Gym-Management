@@ -1,7 +1,5 @@
 import nodemailer from "nodemailer";
 
-type NotificationUser = { email: string; name: string };
-
 function transporter() {
   if (!process.env.EMAIL_HOST || !process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) return undefined;
   return nodemailer.createTransport({
@@ -12,7 +10,7 @@ function transporter() {
   });
 }
 
-export async function sendDietPlanNotification(user: NotificationUser) {
+export async function sendDietPlanNotification(user) {
   const mailer = transporter();
   if (!mailer) return;
   await mailer.sendMail({
@@ -23,7 +21,7 @@ export async function sendDietPlanNotification(user: NotificationUser) {
   });
 }
 
-export async function sendSubscriptionExpiryReminder(user: NotificationUser, daysRemaining: number) {
+export async function sendSubscriptionExpiryReminder(user, daysRemaining) {
   const mailer = transporter();
   if (!mailer) return;
   await mailer.sendMail({

@@ -1,4 +1,6 @@
-import { model, Schema } from "mongoose";
+import mongoose from "mongoose";
+
+const { model, Schema } = mongoose;
 
 const tenant = { type: Schema.Types.ObjectId, ref: "Gym", required: true, index: true };
 

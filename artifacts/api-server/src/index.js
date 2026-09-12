@@ -1,6 +1,6 @@
-import app from "./app";
-import { logger } from "./lib/logger";
-import { connectMongo } from "./config/database";
+import app from "./app.js";
+import { logger } from "./lib/logger.js";
+import { connectMongo } from "./config/database.js";
 
 const rawPort = process.env["PORT"] ?? "8080";
 
