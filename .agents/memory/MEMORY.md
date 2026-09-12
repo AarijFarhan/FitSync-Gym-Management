@@ -1,0 +1,1 @@
+- [Workspace build quirks](workspace-build-quirks.md) — target package installs explicitly and include DOM iterable types for generated browser clients.

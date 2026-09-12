@@ -1,0 +1,527 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: auth
+    description: Authentication
+  - name: dashboard
+    description: Role-based dashboard summaries
+  - name: members
+    description: Gym member management
+  - name: trainers
+    description: Trainer management
+  - name: attendance
+    description: Attendance tracking
+  - name: diet
+    description: AI diet plans
+  - name: workouts
+    description: Workout progress
+  - name: billing
+    description: Subscription plans and checkout
+  - name: admin
+    description: Super admin operations
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /auth/login:
+    post:
+      operationId: login
+      tags: [auth]
+      summary: Sign in to FitSync
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginInput"
+      responses:
+        "200":
+          description: Authenticated user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthSession"
+        "401":
+          description: Invalid credentials
+  /auth/demo:
+    get:
+      operationId: getDemoAccounts
+      tags: [auth]
+      summary: List demo accounts
+      responses:
+        "200":
+          description: Demo credentials
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DemoAccount"
+  /dashboard/overview:
+    get:
+      operationId: getDashboardOverview
+      tags: [dashboard]
+      summary: Get a role-specific dashboard overview
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          description: Dashboard overview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardOverview"
+  /members:
+    get:
+      operationId: listMembers
+      tags: [members]
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+        - name: search
+          in: query
+          schema: { type: string }
+      responses:
+        "200":
+          description: Members in the current gym
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Member" }
+    post:
+      operationId: createMember
+      tags: [members]
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/MemberInput" }
+      responses:
+        "201":
+          description: Created member
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Member" }
+  /members/{memberId}:
+    get:
+      operationId: getMember
+      tags: [members]
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/MemberId"
+      responses:
+        "200":
+          description: Member details
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Member" }
+  /trainers:
+    get:
+      operationId: listTrainers
+      tags: [trainers]
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          description: Trainers in the current gym
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Trainer" }
+    post:
+      operationId: createTrainer
+      tags: [trainers]
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/TrainerInput" }
+      responses:
+        "201":
+          description: Created trainer
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Trainer" }
+  /attendance:
+    get:
+      operationId: listAttendance
+      tags: [attendance]
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          description: Attendance history
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Attendance" }
+    post:
+      operationId: checkIn
+      tags: [attendance]
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AttendanceInput" }
+      responses:
+        "201":
+          description: Attendance record
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Attendance" }
+  /diet-plans:
+    get:
+      operationId: listDietPlans
+      tags: [diet]
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          description: Diet plans available to the current user
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/DietPlan" }
+    post:
+      operationId: generateDietPlan
+      tags: [diet]
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/DietPlanInput" }
+      responses:
+        "201":
+          description: Generated diet plan
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/DietPlan" }
+  /workouts:
+    get:
+      operationId: listWorkouts
+      tags: [workouts]
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          description: Workout schedule and progress
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Workout" }
+    post:
+      operationId: logWorkout
+      tags: [workouts]
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/WorkoutInput" }
+      responses:
+        "201":
+          description: Workout log
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Workout" }
+  /billing/checkout:
+    post:
+      operationId: createCheckout
+      tags: [billing]
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CheckoutInput" }
+      responses:
+        "200":
+          description: Stripe checkout session or demo confirmation
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CheckoutSession" }
+  /admin/gyms:
+    get:
+      operationId: listGyms
+      tags: [admin]
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+      responses:
+        "200":
+          description: All gyms
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Gym" }
+  /admin/gyms/{gymId}/suspend:
+    post:
+      operationId: suspendGym
+      tags: [admin]
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+        - name: gymId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Updated gym
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Gym" }
+components:
+  parameters:
+    Authorization:
+      name: Authorization
+      in: header
+      required: false
+      schema: { type: string }
+    MemberId:
+      name: memberId
+      in: path
+      required: true
+      schema: { type: string }
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+    LoginInput:
+      type: object
+      required: [email, password]
+      properties:
+        email: { type: string, format: email }
+        password: { type: string, minLength: 4 }
+    AuthSession:
+      type: object
+      required: [token, user]
+      properties:
+        token: { type: string }
+        user: { $ref: "#/components/schemas/User" }
+    DemoAccount:
+      type: object
+      required: [role, email, password, name]
+      properties:
+        role: { type: string }
+        email: { type: string }
+        password: { type: string }
+        name: { type: string }
+    User:
+      type: object
+      required: [id, name, email, role, gymName, gymPlan]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        email: { type: string }
+        role: { type: string, enum: [super_admin, gym_owner, trainer, member] }
+        gymName: { type: string }
+        gymPlan: { type: string, enum: [FREE, PRO] }
+        avatar: { type: string }
+    Gym:
+      type: object
+      required: [id, name, slug, plan, members, trainers, status, mrr]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        slug: { type: string }
+        plan: { type: string, enum: [FREE, PRO] }
+        members: { type: integer }
+        trainers: { type: integer }
+        status: { type: string, enum: [active, suspended] }
+        mrr: { type: number }
+        joined: { type: string }
+    DashboardOverview:
+      type: object
+      required: [role, stats, growth, activity]
+      properties:
+        role: { type: string }
+        stats:
+          type: array
+          items:
+            type: object
+            required: [label, value, delta]
+            properties:
+              label: { type: string }
+              value: { type: string }
+              delta: { type: string }
+              tone: { type: string }
+        growth:
+          type: array
+          items:
+            type: object
+            required: [month, members]
+            properties:
+              month: { type: string }
+              members: { type: integer }
+        activity:
+          type: array
+          items:
+            type: object
+            required: [id, title, detail, time]
+            properties:
+              id: { type: string }
+              title: { type: string }
+              detail: { type: string }
+              time: { type: string }
+              type: { type: string }
+    Member:
+      type: object
+      required: [id, name, email, goal, status, trainer, progress, lastActive, joined]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        email: { type: string }
+        goal: { type: string }
+        status: { type: string, enum: [Active, Paused, At risk] }
+        trainer: { type: string }
+        progress: { type: integer }
+        lastActive: { type: string }
+        joined: { type: string }
+        initials: { type: string }
+    MemberInput:
+      type: object
+      required: [name, email, goal]
+      properties:
+        name: { type: string }
+        email: { type: string, format: email }
+        goal: { type: string }
+    Trainer:
+      type: object
+      required: [id, name, email, specialty, members, status, initials]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        email: { type: string }
+        specialty: { type: string }
+        members: { type: integer }
+        status: { type: string, enum: [Active, Away] }
+        initials: { type: string }
+    TrainerInput:
+      type: object
+      required: [name, email, specialty]
+      properties:
+        name: { type: string }
+        email: { type: string, format: email }
+        specialty: { type: string }
+    Attendance:
+      type: object
+      required: [id, member, date, checkIn, status]
+      properties:
+        id: { type: string }
+        member: { type: string }
+        date: { type: string }
+        checkIn: { type: string }
+        checkOut: { type: ["string", "null"] }
+        status: { type: string, enum: [Present, Late, Absent] }
+    AttendanceInput:
+      type: object
+      required: [memberId]
+      properties:
+        memberId: { type: string }
+        action: { type: string, enum: [check_in, check_out] }
+    DietPlan:
+      type: object
+      required: [id, memberId, title, calories, generatedAt, days]
+      properties:
+        id: { type: string }
+        memberId: { type: string }
+        title: { type: string }
+        calories: { type: integer }
+        generatedAt: { type: string }
+        days:
+          type: array
+          items:
+            type: object
+            required: [day, meals]
+            properties:
+              day: { type: string }
+              meals:
+                type: array
+                items:
+                  type: object
+                  required: [type, name, calories]
+                  properties:
+                    type: { type: string }
+                    name: { type: string }
+                    calories: { type: integer }
+    DietPlanInput:
+      type: object
+      required: [age, weight, height, gender, goal, activity, restrictions]
+      properties:
+        age: { type: integer }
+        weight: { type: number }
+        height: { type: number }
+        gender: { type: string }
+        goal: { type: string }
+        activity: { type: string }
+        restrictions:
+          type: array
+          items: { type: string }
+    Workout:
+      type: object
+      required: [id, name, type, scheduledFor, duration, status]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        type: { type: string }
+        scheduledFor: { type: string }
+        duration: { type: integer }
+        status: { type: string, enum: [Scheduled, Completed, Missed] }
+        member: { type: string }
+    WorkoutInput:
+      type: object
+      required: [name, type, duration]
+      properties:
+        name: { type: string }
+        type: { type: string }
+        duration: { type: integer }
+        memberId: { type: string }
+    CheckoutInput:
+      type: object
+      required: [plan]
+      properties:
+        plan: { type: string, enum: [PRO] }
+    CheckoutSession:
+      type: object
+      required: [url, status]
+      properties:
+        url: { type: string }
+        status: { type: string }
+
