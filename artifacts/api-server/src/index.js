@@ -10,7 +10,7 @@ if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
 
-void connectMongo();
+await connectMongo();
 
 app.listen(port, (err) => {
   if (err) {
