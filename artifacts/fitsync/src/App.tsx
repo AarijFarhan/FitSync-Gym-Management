@@ -76,10 +76,10 @@ function Brand({ dark = false }: { dark?: boolean }) {
 
 function Marketing() {
   return <div className="noise min-h-[100dvh] overflow-hidden bg-background text-foreground">
-    <header className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-5 py-5 lg:px-8">
+    <header className="relative z-10 mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:px-5 sm:py-5 lg:px-8">
       <Brand />
       <nav className="hidden items-center gap-7 text-sm font-semibold text-muted-foreground md:flex"><a href="#platform">Platform</a><a href="#roles">For every role</a><a href="#pricing">Pricing</a></nav>
-      <div className="flex items-center gap-2"><Link href="/login" data-testid="link-sign-in" className="rounded-xl px-4 py-2 text-sm font-bold text-muted-foreground hover:bg-muted">Sign in</Link><Link href="/login" data-testid="link-demo" className="rounded-xl bg-primary px-4 py-2 text-sm font-bold text-primary-foreground shadow-[0_4px_0_hsl(35_95%_44%)]">Open demo <ArrowRight className="ml-1 inline size-4" /></Link></div>
+      <div className="flex items-center gap-1.5 sm:gap-2"><Link href="/login" data-testid="link-sign-in" className="whitespace-nowrap rounded-xl px-3 py-2 text-sm font-bold text-muted-foreground hover:bg-muted sm:px-4">Sign in</Link><Link href="/login" data-testid="link-demo" className="whitespace-nowrap rounded-xl bg-primary px-3 py-2 text-sm font-bold text-primary-foreground shadow-[0_4px_0_hsl(35_95%_44%)] sm:px-4">Open demo <ArrowRight className="ml-1 hidden size-4 sm:inline" /></Link></div>
     </header>
     <main>
       <section className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-14 lg:grid-cols-[1.02fr_.98fr] lg:px-8 lg:pb-28 lg:pt-24">
