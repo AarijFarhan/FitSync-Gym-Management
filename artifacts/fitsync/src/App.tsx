@@ -11,7 +11,7 @@ import {
   getGetDashboardOverviewQueryKey, getGetDemoAccountsQueryKey, getGetMemberQueryKey,
   getListAttendanceQueryKey, getListDietPlansQueryKey, getListGymsQueryKey,
   getListMembersQueryKey, getListTrainersQueryKey, getListWorkoutsQueryKey,
-  setAuthTokenGetter, useCheckIn, useCreateCheckout, useCreateMember, useCreateTrainer,
+  setAuthTokenGetter, setBaseUrl, useCheckIn, useCreateCheckout, useCreateMember, useCreateTrainer,
   useGenerateDietPlan, useGetDashboardOverview, useGetDemoAccounts, useGetMember,
   useListAttendance, useListDietPlans, useListGyms, useListMembers, useListTrainers,
   useListWorkouts, useLogWorkout, useLogin, useSuspendGym,
@@ -24,6 +24,7 @@ import '@/index.css';
 
 const queryClient = new QueryClient();
 setAuthTokenGetter(() => localStorage.getItem('fitsync_token'));
+setBaseUrl(import.meta.env.VITE_API_BASE_URL ?? null);
 
 const roles = ['super_admin', 'gym_owner', 'trainer', 'member'] as const;
 type Role = typeof roles[number];

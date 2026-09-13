@@ -1,0 +1,6 @@
+{
+  "rootDirectory": "artifacts/fitsync",
+  "framework": "vite",
+  "buildCommand": "cd ../.. && corepack enable && pnpm install && cd artifacts/fitsync && pnpm run build",
+  "outputDirectory": "dist/public"
+}

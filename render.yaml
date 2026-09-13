@@ -1,0 +1,27 @@
+# Render Blueprint — API server only.
+# Use together with the frontend hosted on Vercel (see vercel.json).
+# The frontend calls this API via CORS_ORIGIN (Bearer token auth, no cookies),
+# so no static-frontend serving / build is required here.
+#
+# Required env vars (set in the Render dashboard, marked `sync: false`):
+#   MONGO_URI   - MongoDB connection string
+#   JWT_SECRET  - secret used to sign auth tokens
+#   CORS_ORIGIN - comma-separated list of allowed frontend origins, e.g.
+#                 https://myfitsync.vercel.app
+services:
+  - type: web
+    name: fitsync-api
+    runtime: node
+    plan: free
+    buildCommand: corepack enable && pnpm install
+    startCommand: node artifacts/api-server/src/index.js
+    healthCheckPath: /api/healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CORS_ORIGIN
+        sync: false
