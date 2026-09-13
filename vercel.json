@@ -1,5 +1,5 @@
 {
   "framework": "vite",
-  "buildCommand": "pnpm --filter ./artifacts/fitsync build",
+  "buildCommand": "pnpm --filter ./artifacts/fitsync run build",
   "outputDirectory": "artifacts/fitsync/dist/public"
 }
